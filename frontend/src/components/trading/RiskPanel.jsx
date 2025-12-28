@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Bell, Beaker, Target } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'sonner';
+import OptimizeEntryModal from './OptimizeEntryModal';
+import SimulateTradeModal from './SimulateTradeModal';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
 
 export default function RiskPanel({ riskData, analysis, onOptimizeComplete, onAlertSet, onSimulationCreated }) {
-  const [isOptimizing, setIsOptimizing] = useState(false);
-  const [isSimulating, setIsSimulating] = useState(false);
+  const [isOptimizeModalOpen, setIsOptimizeModalOpen] = useState(false);
+  const [isSimulateModalOpen, setIsSimulateModalOpen] = useState(false);
   
   if (!riskData) return null;
 
