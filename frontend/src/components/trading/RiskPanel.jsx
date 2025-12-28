@@ -149,5 +149,21 @@ export default function RiskPanel({ riskData, analysis, onOptimizeComplete, onAl
         </div>
       </div>
     </div>
+
+      {/* Modals */}
+      <OptimizeEntryModal
+        isOpen={isOptimizeModalOpen}
+        onClose={() => setIsOptimizeModalOpen(false)}
+        analysis={analysis}
+        riskData={riskData}
+      />
+
+      <SimulateTradeModal
+        isOpen={isSimulateModalOpen}
+        onClose={() => setIsSimulateModalOpen(false)}
+        analysis={analysis}
+        riskData={riskData}
+      />
+    </>
   );
 }
