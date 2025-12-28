@@ -97,10 +97,21 @@ export default function PotentialPortfolio({ isOpen, onClose }) {
               </div>
             </div>
           ) : entries.length === 0 ? (
-            <div className="text-center py-20 text-muted-foreground">
-              <Wallet className="h-16 w-16 mx-auto mb-4 opacity-30" />
-              <p className="text-lg mb-2">Nu există intrări în watchlist</p>
-              <p className="text-sm">Adăugați simboluri folosind butoanele de alertă sau simulare</p>
+            <div className="glass-card p-12 text-center">
+              <div className="h-20 w-20 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mx-auto mb-6">
+                <Wallet className="h-10 w-10 text-purple-400 opacity-50" />
+              </div>
+              <h3 className="font-bold text-xl mb-3">Watchlist-ul tău este gol</h3>
+              <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
+                Adaugă primul simbol pentru a-l monitoriza. Folosește butoanele de simulare 
+                din secțiunea Risk Management pentru a adăuga acțiuni.
+              </p>
+              <div className="glass-card p-4 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 rounded-lg max-w-md mx-auto">
+                <p className="text-sm text-indigo-400">
+                  💡 <span className="font-bold">Tip:</span> Analizează un simbol și folosește butonul 
+                  <span className="font-mono text-violet-400"> "🧪 Simulate Trade"</span> pentru a-l adăuga aici.
+                </p>
+              </div>
             </div>
           ) : (
             <div className="space-y-4">
