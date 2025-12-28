@@ -1,0 +1,138 @@
+{
+  "identity": {
+    "persona": "E1: The Anti-AI Designer",
+    "mission": "Create a 'Midnight Terminal' aesthetic that feels like a professional Bloomberg/institutional tool, not a generic SaaS dashboard.",
+    "principles": [
+      "Fusion: Mix 'Cyberpunk' neon with 'Swiss' grid precision.",
+      "Density: High data density is a feature, not a bug. Traders need information.",
+      "Contrast: Deepest blacks vs. Neon signals. No mid-gray mush.",
+      "Motion: Micro-interactions only. No slow fades. Instant feedback."
+    ]
+  },
+  "typography": {
+    "fonts": {
+      "headings": "Chivo",
+      "body": "Inter",
+      "mono": "JetBrains Mono"
+    },
+    "import_url": "https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap",
+    "rules": [
+      "Use 'Chivo' for all Section Headers and KPI Labels (font-weight: 900 for big numbers).",
+      "Use 'JetBrains Mono' for ALL financial data, prices, and percentages.",
+      "Use 'Inter' for UI labels, tooltips, and long text.",
+      "Letter Spacing: tracking-tight (-0.02em) for Headings.",
+      "Uppercase: All 'Overline' labels (e.g., 'MARKET STATUS') must be uppercase, text-xs, tracking-widest."
+    ]
+  },
+  "colors": {
+    "theme": "dark",
+    "palette": {
+      "background": "#09090b",
+      "surface": "#18181b",
+      "surface_highlight": "#27272a",
+      "border": "#27272a",
+      "primary": "#22c55e",
+      "bull": "#4ade80",
+      "bear": "#f87171",
+      "accent_cyan": "#06b6d4",
+      "accent_purple": "#a855f7",
+      "text_main": "#fafafa",
+      "text_muted": "#a1a1aa"
+    },
+    "tailwind_extension": {
+      "colors": {
+        "bull": "hsl(142, 71%, 45%)",
+        "bear": "hsl(0, 84%, 60%)",
+        "terminal": {
+          "black": "#050505",
+          "dark": "#0A0A0A",
+          "surface": "#121212",
+          "border": "#262626"
+        }
+      }
+    }
+  },
+  "layout": {
+    "grid_system": "The Control Room Grid",
+    "rules": [
+      "Dashboard must use a dense BENTO GRID (CSS Grid).",
+      "Gap: gap-2 or gap-4 (Tight spacing for data correlation).",
+      "Containers: No rounded corners > 4px. Sharp edges preferred.",
+      "Borders: 1px solid border-white/10. No shadows in dark mode."
+    ],
+    "spacing": {
+      "container_padding": "p-4 md:p-6",
+      "section_gap": "gap-6"
+    }
+  },
+  "components": {
+    "overrides": [
+      {
+        "component": "Card",
+        "style": "bg-terminal-surface border-terminal-border rounded-sm shadow-none"
+      },
+      {
+        "component": "Button",
+        "style": "rounded-sm font-mono uppercase tracking-wider text-xs h-8"
+      },
+      {
+        "component": "Input",
+        "style": "bg-black/50 border-white/10 focus:border-accent-cyan rounded-sm font-mono"
+      },
+      {
+        "component": "Badge",
+        "style": "rounded-none px-2 py-0.5 font-mono text-[10px] uppercase"
+      }
+    ],
+    "shadcn_customization": "Modify /app/frontend/src/components/ui/card.jsx to remove default shadows and increase border contrast for dark mode."
+  },
+  "charts": {
+    "library": "lightweight-charts",
+    "theme_config": {
+      "layout": {
+        "background": { "type": "solid", "color": "transparent" },
+        "textColor": "#a1a1aa"
+      },
+      "grid": {
+        "vertLines": { "color": "#27272a" },
+        "horzLines": { "color": "#27272a" }
+      },
+      "crosshair": {
+        "mode": 1,
+        "vertLine": { "color": "#06b6d4", "labelBackgroundColor": "#06b6d4" },
+        "horzLine": { "color": "#06b6d4", "labelBackgroundColor": "#06b6d4" }
+      }
+    }
+  },
+  "images": {
+    "backgrounds": [
+      {
+        "url": "https://images.pexels.com/photos/18545023/pexels-photo-18545023.jpeg",
+        "category": "hero_bg",
+        "description": "Abstract dark data grid for login or hero background"
+      }
+    ],
+    "avatars": [
+      {
+        "url": "https://images.pexels.com/photos/5831255/pexels-photo-5831255.jpeg",
+        "category": "user_avatar",
+        "description": "Professional trader avatar"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL FONTS: Add the Google Fonts link to /app/frontend/public/index.html immediately.",
+    "2. CONFIGURE TAILWIND: Update tailwind.config.js with the 'terminal' color palette.",
+    "3. GLOBAL CSS: In index.css, set body background to #050505 and text to #fafafa.",
+    "4. COMPONENT AUDIT: Go through Shadcn components and remove 'rounded-xl' or 'rounded-lg'. Change to 'rounded-sm' or 'rounded-md' for a sharper, professional look.",
+    "5. CHART INTEGRATION: When building the Chart component, ensure the container has 'relative w-full h-full' and the chart resizes automatically.",
+    "6. DATA-TESTID: Every interactive element (buttons, inputs, chart toggles) MUST have a data-testid attribute (e.g., 'buy-button', 'timeframe-selector').",
+    "7. FILE EXTENSIONS: Use .js and .jsx. Do not use .ts or .tsx."
+  ],
+  "universal_guidelines": [
+    "Do not use gradients for backgrounds. Use solid deep blacks.",
+    "Do not center text. Left align is standard for data.",
+    "Use 'sonner' for notifications.",
+    "Always use 'JetBrains Mono' for prices and percentages."
+  ]
+}
