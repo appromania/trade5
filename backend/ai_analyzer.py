@@ -303,9 +303,21 @@ Evită generalitățile - oferă un plan de acțiune clar pe care traderul îl p
             analysis_parts.append("• 🎯 Recomandare: SELL - Take profit sau exit. Zone de overbought/risc ridicat.")
         
         elif signal == 'HOLD':
-            analysis_parts.append("• 🎯 Recomandare: HOLD poziția actuală. Monitorizați nivelurile cheie.")
+            # HOLD can be triggered by R/R < 1.5 in ranging market
+            if rr_ratio < 1.5:
+                analysis_parts.append(f"• 🎯 Recomandare: HOLD - Piață laterală + R/R {rr_ratio:.2f} sub 1.5. Nu există oportunitate clară momentan.")
+            else:
+                analysis_parts.append("• 🎯 Recomandare: HOLD poziția actuală. Monitorizați nivelurile cheie.")
         
-        elif signal in ['WAIT', 'NEUTRAL']:
+        elif signal == 'WAIT':
+            # WAIT can be triggered by R/R < 1.5 in bullish trend
+            if rr_ratio < 1.5 and trend == 'BULLISH':
+                analysis_parts.append(f"• 🎯 Recomandare: WAIT - Trend bullish valid DAR R/R {rr_ratio:.2f} sub 1.5. Așteptați pullback la suport ${support:.2f} pentru intrare mai bună (R/R va crește la ~2:1+).")
+            else:
+                # Original WAIT logic
+                pass
+        
+        if signal in ['WAIT', 'NEUTRAL']:
             # Generate ACTION PLAN based on conditions
             action_plan_parts = ["• 🎯 Recomandare: WAIT - Setup nefavorabil."]
             
