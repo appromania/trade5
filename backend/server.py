@@ -847,6 +847,9 @@ async def set_alert(request: SetAlertRequest):
         
         await db.alerts.insert_one(alert)
         
+        # Remove MongoDB's _id before returning
+        alert.pop('_id', None)
+        
         return {
             'success': True,
             'alert_id': alert_id,
@@ -1007,6 +1010,9 @@ async def add_to_watchlist(request: AddToWatchlistRequest):
         }
         
         await db.watchlist.insert_one(entry)
+        
+        # Remove MongoDB's _id before returning
+        entry.pop('_id', None)
         
         return {
             'success': True,
