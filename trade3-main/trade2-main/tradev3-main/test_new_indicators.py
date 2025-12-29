@@ -8,7 +8,7 @@ import json
 
 def test_new_indicators():
     """Test the new indicators added to the trading system"""
-    base_url = "https://tradewiz-22.preview.emergentagent.com"
+    base_url = "https://frontend-builder-12.preview.emergentagent.com"
     api_url = f"{base_url}/api"
     
     print("🔍 Testing New Indicators: Donchian Channel, Williams Fractals, Trend Alignment")

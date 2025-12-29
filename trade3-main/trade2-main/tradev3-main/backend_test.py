@@ -11,7 +11,7 @@ from datetime import datetime
 import time
 
 class TradingSystemTester:
-    def __init__(self, base_url="https://tradewiz-22.preview.emergentagent.com"):
+    def __init__(self, base_url="https://frontend-builder-12.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.tests_run = 0
