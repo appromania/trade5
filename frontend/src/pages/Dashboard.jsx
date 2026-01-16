@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Settings, TrendingUp, BarChart3, Calculator, Bell, Wallet, Beaker } from 'lucide-react';
 import SearchBar from '@/components/trading/SearchBar';
+import AdvancedChart from '@/components/trading/AdvancedChart';
 import CandlestickChart from '@/components/trading/CandlestickChart';
 import IndicatorsPanel from '@/components/trading/IndicatorsPanel';
 import RiskPanel from '@/components/trading/RiskPanel';
@@ -277,14 +278,11 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Left Column - Chart & Indicators */}
               <div className="lg:col-span-8 space-y-6">
-                {/* Chart with Donchian Channel and Williams Fractals */}
-                <CandlestickChart
+                {/* Advanced Chart with All Indicators */}
+                <AdvancedChart
                   symbol={analysis.symbol}
                   chartData={analysis.chart_data}
-                  levels={analysis.chart_levels}
-                  useHeikinAshi={useHeikinAshi}
-                  donchianChannel={analysis.donchian_channel}
-                  williamsFractals={analysis.williams_fractals}
+                  indicators={analysis.indicators}
                 />
 
                 <IndicatorsPanel indicators={analysis.indicators} />
