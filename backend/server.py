@@ -359,7 +359,7 @@ async def analyze_symbol(request: AnalyzeRequest):
             row = data.iloc[idx]
             
             # Format time based on interval
-            if request.timeframe in ['1h', '4h', '30m', '15m', '5m']:
+            if request.timeframe in ['1h', '4h', '30m', '15m', '5m', '1m']:
                 # For intraday: use Unix timestamp (seconds)
                 if hasattr(row['date'], 'timestamp'):
                     time_value = int(row['date'].timestamp())
