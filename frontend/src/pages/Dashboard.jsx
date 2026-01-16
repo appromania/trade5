@@ -71,6 +71,7 @@ export default function Dashboard() {
   };
 
   const timeframes = [
+    { value: '5m', label: '5M' },
     { value: '1h', label: '1H' },
     { value: '4h', label: '4H' },
     { value: '1d', label: '1D' },
