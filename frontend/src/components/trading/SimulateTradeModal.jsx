@@ -30,6 +30,12 @@ export default function SimulateTradeModal({ isOpen, onClose, analysis, riskData
   const profitAmount = (customTP - entryPrice) * positionSize;
   const lossAmount = (customSL - entryPrice) * positionSize;
   const profitPercent = ((customTP - entryPrice) / entryPrice) * 100;
+  const lossPercent = ((customSL - entryPrice) / entryPrice) * 100;
+  
+  // Calculate Risk/Reward ratio
+  const riskAmount = Math.abs(entryPrice - customSL);
+  const rewardAmount = Math.abs(customTP - entryPrice);
+  const rrRatio = riskAmount > 0 ? (rewardAmount / riskAmount).toFixed(1) : '0.0';
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
