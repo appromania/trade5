@@ -94,6 +94,15 @@ class TechnicalAnalyzer:
         atr = tr.rolling(window=period).mean()
         return atr
     
+    def calculate_vwap(self) -> pd.Series:
+        """Calculate Volume Weighted Average Price"""
+        # VWAP = Cumulative(Typical Price * Volume) / Cumulative(Volume)
+        typical_price = (self.df['high'] + self.df['low'] + self.df['close']) / 3
+        cumulative_tp_volume = (typical_price * self.df['volume']).cumsum()
+        cumulative_volume = self.df['volume'].cumsum()
+        vwap = cumulative_tp_volume / cumulative_volume
+        return vwap
+    
     def calculate_macd(self, fast: int = 12, slow: int = 26, signal: int = 9) -> Dict[str, pd.Series]:
         """Calculate MACD"""
         ema_fast = self.calculate_ema(fast)
