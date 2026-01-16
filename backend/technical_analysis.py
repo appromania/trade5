@@ -313,6 +313,13 @@ class TechnicalAnalyzer:
             ema_50 = self.calculate_ema(50)
             ema_200 = self.calculate_ema(200)
             
+            # SMAs
+            sma_20 = self.calculate_sma(20)
+            sma_200 = self.calculate_sma(200)
+            
+            # VWAP
+            vwap = self.calculate_vwap()
+            
             # RSI and Stoch RSI
             rsi = self.calculate_rsi()
             stoch_rsi = self.calculate_stoch_rsi()
@@ -361,7 +368,10 @@ class TechnicalAnalyzer:
                     'current': round(current_price, 2),
                     'ema_20': round(float(ema_20.iloc[-1]), 2),
                     'ema_50': round(float(ema_50.iloc[-1]), 2),
-                    'ema_200': round(float(ema_200.iloc[-1]), 2) if len(self.df) >= 200 else None
+                    'ema_200': round(float(ema_200.iloc[-1]), 2) if len(self.df) >= 200 else None,
+                    'sma_20': round(float(sma_20.iloc[-1]), 2),
+                    'sma_200': round(float(sma_200.iloc[-1]), 2) if len(self.df) >= 200 else None,
+                    'vwap': round(float(vwap.iloc[-1]), 2)
                 },
                 'rsi': {
                     'value': round(float(rsi.iloc[-1]), 2),
@@ -380,8 +390,19 @@ class TechnicalAnalyzer:
                 },
                 'atr': {
                     'value': round(float(atr.iloc[-1]), 2),
-                    'percent': round((float(atr.iloc[-1]) / current_price) * 100, 2)
+                    'percent': round((float(atr.iloc[-1]) / current_price) * 100, 2),
+                    # Add series data for chart overlay
+                    'series': [{'time': str(self.df.index[i]), 'value': round(float(atr.iloc[i]), 2)} 
+                              for i in range(len(atr)) if not pd.isna(atr.iloc[i])]
                 },
+                'sma_series': {
+                    'sma_20': [{'time': str(self.df.index[i]), 'value': round(float(sma_20.iloc[i]), 2)} 
+                              for i in range(len(sma_20)) if not pd.isna(sma_20.iloc[i])],
+                    'sma_200': [{'time': str(self.df.index[i]), 'value': round(float(sma_200.iloc[i]), 2)} 
+                               for i in range(len(sma_200)) if not pd.isna(sma_200.iloc[i])] if len(self.df) >= 200 else []
+                },
+                'vwap_series': [{'time': str(self.df.index[i]), 'value': round(float(vwap.iloc[i]), 2)} 
+                               for i in range(len(vwap)) if not pd.isna(vwap.iloc[i])],
                 'macd': {
                     'macd_line': round(float(macd_data['macd'].iloc[-1]), 2),
                     'signal_line': round(float(macd_data['signal'].iloc[-1]), 2),
