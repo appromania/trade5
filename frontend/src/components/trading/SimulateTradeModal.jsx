@@ -37,6 +37,60 @@ export default function SimulateTradeModal({ isOpen, onClose, analysis, riskData
   const rewardAmount = Math.abs(customTP - entryPrice);
   const rrRatio = riskAmount > 0 ? (rewardAmount / riskAmount).toFixed(1) : '0.0';
 
+  const handleSimulate = async () => {
+    setIsSubmitting(true);
+    try {
+      // First, create simulation
+      const response = await axios.post(`${API_URL}/simulate-trade`, {
+        symbol: analysis.symbol,
+        entry_price: entryPrice,
+        stop_loss: customSL,
+        take_profit: customTP,
+        position_size: positionSize,
+        strategy: 'manual',
+        notes: `Simulare cu capital $${capital} - R/R ${rrRatio}:1`
+      });
+
+      if (response.data.success) {
+        // Then, add to watchlist/portfolio
+        try {
+          await axios.post(`${API_URL}/watchlist/add`, {
+            symbol: analysis.symbol,
+            ideal_entry_price: entryPrice,
+            current_price: analysis.current_price,
+            stop_loss: customSL,
+            take_profit: customTP,
+            confidence_score: analysis.confidence_score,
+            notes: `Simulare - Capital: $${capital}`
+          });
+
+          toast.success('Tranzacție salvată!', {
+            description: `${analysis.symbol} adăugat în Strategy Tester și Portfolio`,
+            duration: 5000
+          });
+        } catch (watchlistError) {
+          console.error('Watchlist add error:', watchlistError);
+          // Show success even if watchlist fails
+          toast.success('Tranzacție simulată creată!', {
+            description: `${analysis.symbol} adăugat în Strategy Tester`,
+            duration: 5000
+          });
+        }
+
+        onClose();
+      }
+    } catch (error) {
+      console.error('Simulate trade error:', error);
+      const errorMsg = error.response?.data?.detail || error.message || 'Eroare necunoscută';
+      toast.error('Eroare la crearea simulării', {
+        description: errorMsg,
+        duration: 5000
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
       <div className="glass-card max-w-2xl w-full max-h-[90vh] overflow-y-auto">
